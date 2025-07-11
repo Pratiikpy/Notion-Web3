@@ -10,7 +10,7 @@ class IrysSnippetVaultTester:
     def __init__(self, base_url=None):
         # Use the production URL from frontend/.env
         if base_url is None:
-            base_url = "https://f0c3a356-7eed-4148-b03d-09fcdaab0dad.preview.emergentagent.com"
+            base_url = "https://0bb6025e-e237-45ce-a098-51a15829f3a6.preview.emergentagent.com"
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.tests_run = 0
