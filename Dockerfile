@@ -1,5 +1,23 @@
-# Use Python 3.11
+# Multi-stage build for React frontend + FastAPI backend
+
+# Stage 1: Build React frontend
+FROM node:18 as frontend
+
+WORKDIR /app/frontend
+
+# Copy frontend package files
+COPY frontend/package*.json ./
+COPY frontend/yarn.lock ./
+RUN yarn install
+
+# Copy frontend source and build
+COPY frontend/ ./
+RUN yarn build
+
+# Stage 2: Backend with built frontend
 FROM python:3.11-slim
+
+WORKDIR /app
 
 # Install Node.js for Irys service
 RUN apt-get update && apt-get install -y \
@@ -7,9 +25,6 @@ RUN apt-get update && apt-get install -y \
     && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
-
-# Set working directory
-WORKDIR /app
 
 # Copy and install Python dependencies
 COPY backend/requirements.txt ./
@@ -24,8 +39,8 @@ RUN npm prune --production
 # Copy backend code
 COPY backend/ ./
 
-# Copy frontend build (we'll build it separately)
-COPY frontend/build ./static
+# Copy built frontend from stage 1
+COPY --from=frontend /app/frontend/build ./static
 
 # Set default port for Render
 ENV PORT=8000
