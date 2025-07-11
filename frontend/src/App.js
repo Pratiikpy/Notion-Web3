@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+console.log('Backend URL:', BACKEND_URL); // Debug log
 const API = `${BACKEND_URL}/api`;
 
 // Glass Card Component
