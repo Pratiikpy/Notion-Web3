@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Implement social and collaboration features for Irys Snippet Vault: public snippet feed, user profiles, follow/unfollow system, like/bookmark system, comment system, and user discovery."
+user_problem_statement: "User reports that while white screen error is fixed, the app functions (AI analysis, image upload, blockchain storage, social features) may not be working properly. Need comprehensive testing of all backend functionality."
 
 backend:
   - task: "Social API endpoints implementation"
