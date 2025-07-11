@@ -528,6 +528,103 @@ class IrysSnippetVaultTester:
         
         return True
 
+    def test_api_routing_fix(self):
+        """Test the specific API routing fix - NO MORE double /api/api/ prefix"""
+        print("\n🔧 TESTING API ROUTING FIX - Critical Double Prefix Issue")
+        print("="*60)
+        
+        routing_tests_passed = 0
+        routing_tests_total = 5
+        
+        # Test 1: /api/health endpoint (basic connectivity)
+        print("\n1️⃣ Testing /api/health endpoint...")
+        success, response = self.run_test(
+            "Health Check Endpoint",
+            "GET",
+            "health",
+            200
+        )
+        if success:
+            routing_tests_passed += 1
+            print("✅ /api/health working - NO 404 errors")
+        else:
+            print("❌ /api/health failed - API routing issue detected")
+        
+        # Test 2: /api/extract-snippet endpoint (POST)
+        print("\n2️⃣ Testing /api/extract-snippet endpoint...")
+        success, response = self.run_test(
+            "Extract Snippet Endpoint",
+            "POST",
+            "extract-snippet",
+            200,
+            data={"url": "https://example.com"}
+        )
+        if success:
+            routing_tests_passed += 1
+            print("✅ /api/extract-snippet working - NO 404/405 errors")
+        else:
+            print("❌ /api/extract-snippet failed - API routing issue detected")
+        
+        # Test 3: /api/feed/public endpoint (GET)
+        print("\n3️⃣ Testing /api/feed/public endpoint...")
+        success, response = self.run_test(
+            "Public Feed Endpoint",
+            "GET",
+            "feed/public",
+            200
+        )
+        if success:
+            routing_tests_passed += 1
+            print("✅ /api/feed/public working - NO 404/405 errors")
+        else:
+            print("❌ /api/feed/public failed - API routing issue detected")
+        
+        # Test 4: /api/users/discover endpoint (GET)
+        print("\n4️⃣ Testing /api/users/discover endpoint...")
+        success, response = self.run_test(
+            "User Discovery Endpoint",
+            "GET",
+            "users/discover",
+            200
+        )
+        if success:
+            routing_tests_passed += 1
+            print("✅ /api/users/discover working - NO 404/405 errors")
+        else:
+            print("❌ /api/users/discover failed - API routing issue detected")
+        
+        # Test 5: /api/irys-query/{address} endpoint (GET)
+        print("\n5️⃣ Testing /api/irys-query/{address} endpoint...")
+        success, response = self.run_test(
+            "Irys Query Endpoint",
+            "GET",
+            f"irys-query/{self.test_wallet_address_1}",
+            200
+        )
+        if success:
+            routing_tests_passed += 1
+            print("✅ /api/irys-query/{address} working - NO 404/405 errors")
+        else:
+            print("❌ /api/irys-query/{address} failed - API routing issue detected")
+        
+        # Summary of routing fix test
+        print("\n" + "="*60)
+        print(f"🔧 API ROUTING FIX RESULTS: {routing_tests_passed}/{routing_tests_total} endpoints working")
+        print("="*60)
+        
+        if routing_tests_passed == routing_tests_total:
+            print("🎉 API ROUTING FIX SUCCESSFUL!")
+            print("✅ NO MORE double /api/api/ prefix issues")
+            print("✅ All critical endpoints responding correctly")
+            print("✅ Frontend can now communicate with backend properly")
+        else:
+            failed_routing = routing_tests_total - routing_tests_passed
+            print(f"❌ API ROUTING ISSUES DETECTED: {failed_routing} endpoints failing")
+            print("❌ Double prefix /api/api/ issue may still exist")
+            print("❌ Frontend-backend communication may be broken")
+        
+        return routing_tests_passed == routing_tests_total
+
     def run_all_tests(self):
         """Run all API tests in sequence"""
         print("🚀 Starting Irys Snippet Vault API Tests with Enhanced Content Creation")
