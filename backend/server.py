@@ -29,10 +29,14 @@ db = client[os.environ['DB_NAME']]
 # Create the main app without a prefix
 app = FastAPI(title="Irys Snippet Vault API - Social Features")
 
-# Add CORS middleware for Railway
+# Add CORS middleware for Render deployment
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Railway domains
+    allow_origins=[
+        "https://YOUR-SERVICE.onrender.com",  # Replace YOUR-SERVICE with your actual Render service name
+        "http://localhost:8000",
+        "*"  # Keep wildcard for development
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
