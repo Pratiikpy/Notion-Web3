@@ -844,7 +844,7 @@ const SnippetForm = ({ signer, userAddress, onSnippetSaved }) => {
     
     try {
       setIsSummarizing(true);
-      const response = await fetch(`${API}/summarize`, {
+      const response = await fetch(`${API}/api/summarize`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
