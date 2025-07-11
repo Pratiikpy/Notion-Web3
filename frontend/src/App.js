@@ -211,7 +211,7 @@ const PublicFeed = ({ userAddress }) => {
     if (!userAddress) return;
     
     try {
-      const response = await fetch(`${API}/social/like`, {
+      const response = await fetch(`${API}/api/social/like`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
