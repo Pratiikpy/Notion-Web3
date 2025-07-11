@@ -1003,10 +1003,16 @@ static_dirs = [
     Path(__file__).parent / "../frontend/build",  # Local development path
 ]
 
+print(f"🔍 Current working directory: {os.getcwd()}")
+print(f"🔍 __file__ location: {__file__}")
+
 static_dir = None
-for dir_path in static_dirs:
-    if os.path.exists(dir_path):
-        static_dir = str(dir_path)
+for i, dir_path in enumerate(static_dirs):
+    dir_str = str(dir_path)
+    exists = os.path.exists(dir_str)
+    print(f"🔍 Checking static dir {i}: {dir_str} -> exists: {exists}")
+    if exists:
+        static_dir = dir_str
         break
 
 if static_dir:
