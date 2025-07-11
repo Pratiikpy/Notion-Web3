@@ -993,6 +993,7 @@ app.include_router(api_router)
 
 # Static file serving for React frontend
 app.mount("/static", StaticFiles(directory="static"), name="static")
+# Root mount must be LAST to avoid catching API routes
 app.mount("/", StaticFiles(directory="static", html=True), name="root")
 
 # Configure logging
