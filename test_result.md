@@ -334,10 +334,16 @@ agent_communication:
     2. Added image optimization with npm prune --production and pip cache purge
     3. CORS middleware updated to allow Render domains (placeholder YOUR-SERVICE.onrender.com)
     4. Removed /build from .gitignore to allow frontend build files for deployment
-    5. Created comprehensive README with Render deployment guide and environment variables
-    6. App now respects Render's dynamic port assignment while maintaining local development compatibility
+    5. ✅ FIXED: Added static file serving to FastAPI - app.mount('/static') and app.mount('/') for React SPA
+    6. Created comprehensive README with Render deployment guide and environment variables
+    7. App now respects Render's dynamic port assignment while maintaining local development compatibility
+    
+    STATIC FILE SERVING SOLUTION:
+    - Added app.mount('/static', StaticFiles(directory='static'), name='static') for JS/CSS chunks
+    - Added app.mount('/', StaticFiles(directory='static', html=True), name='root') for React SPA routing
+    - This fixes the 404 error by serving index.html for all unknown routes (client-side routing)
     
     NEXT STEPS FOR USER:
     - Deploy to Render with required environment variables (MONGO_URL, IRYS_PRIVATE_KEY, ANTHROPIC_API_KEY, DB_NAME)
     - After deployment, replace YOUR-SERVICE in server.py with actual Render service name
-    - All optimizations maintain free tier compatibility"
+    - All optimizations maintain free tier compatibility and React app will now load properly"
