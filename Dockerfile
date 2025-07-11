@@ -14,6 +14,7 @@ WORKDIR /app
 # Copy and install Python dependencies
 COPY backend/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip cache purge
 
 # Copy and install Node.js dependencies for Irys
 COPY backend/package.json backend/package-lock.json ./
