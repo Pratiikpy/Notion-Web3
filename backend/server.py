@@ -976,9 +976,9 @@ async def get_user_snippets(wallet_address: str):
 # Include the router in the main app
 app.include_router(api_router)
 
-# Static file serving for React frontend (commented out for testing)
-# app.mount("/static", StaticFiles(directory="static"), name="static")
-# app.mount("/", StaticFiles(directory="static", html=True), name="root")
+# Static file serving for React frontend
+app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/", StaticFiles(directory="static", html=True), name="root")
 
 # Health check endpoint for Vercel testing
 @app.get("/api/health")
