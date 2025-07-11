@@ -593,7 +593,7 @@ const createIrysUploader = async (signer) => {
         const signature = await signer.signMessage(message);
         
         // Send to backend for real Irys upload
-        const response = await fetch(`${API}/api/irys-upload`, {
+        const response = await fetch(`${API}/irys-upload`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
