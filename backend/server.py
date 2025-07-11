@@ -1039,14 +1039,23 @@ async def test_spa():
     """Test SPA route"""
     return {"message": "SPA route test working"}
 
-# SPA routing for React - handles both root and all other routes
+# Root route to serve React SPA
+@app.get("/")
+async def serve_root():
+    """Serve React SPA for root route"""
+    if root_static_dir:
+        return FileResponse(f"{root_static_dir}/index.html")
+    else:
+        return {"error": "Static files not available"}
+
+# SPA routing for React - handles all other routes
 @app.get("/{path:path}")
-async def serve_spa(path: str = ""):
+async def serve_spa(path: str):
     """Serve React SPA for client-side routing"""
     # Skip API routes (they are handled by the router)
     if path.startswith("api"):
-        return {"error": "API endpoint not found"}
-    # For all routes (including root), serve index.html for client-side routing
+        raise HTTPException(status_code=404, detail="API endpoint not found")
+    # For all other routes, serve index.html for client-side routing
     if root_static_dir:
         return FileResponse(f"{root_static_dir}/index.html")
     else:
