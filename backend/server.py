@@ -991,14 +991,6 @@ async def test_endpoint():
     """Test endpoint for Vercel deployment verification"""
     return {"message": "API is working correctly", "version": "1.0.0"}
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_credentials=True,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
