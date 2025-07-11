@@ -1013,6 +1013,12 @@ if static_dir:
     app.mount("/static", StaticFiles(directory=static_dir), name="static")
     print(f"✅ Static files mounted from: {static_dir}")
     
+    # Root route for React SPA
+    @app.get("/")
+    async def serve_spa_root():
+        """Serve React SPA root"""
+        return FileResponse(f"{static_dir}/index.html")
+    
     # SPA routing for React - this should be LAST to avoid catching API routes
     @app.get("/{path:path}")
     async def serve_spa(path: str):
