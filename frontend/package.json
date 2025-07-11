@@ -39,6 +39,7 @@
     "vm-browserify": "^1.1.2"
   },
   "scripts": {
+    "prebuild": "echo 'Build environment check:' && echo 'REACT_APP_BACKEND_URL=' && echo $REACT_APP_BACKEND_URL",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
