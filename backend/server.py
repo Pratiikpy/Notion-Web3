@@ -1003,25 +1003,18 @@ static_dirs = [
     Path(__file__).parent / "../frontend/build",  # Local development path
 ]
 
-print(f"🔍 Current working directory: {os.getcwd()}")
-print(f"🔍 __file__ location: {__file__}")
-
 static_dir = None
-for i, dir_path in enumerate(static_dirs):
+for dir_path in static_dirs:
     dir_str = str(dir_path)
-    exists = os.path.exists(dir_str)
-    print(f"🔍 Checking static dir {i}: {dir_str} -> exists: {exists}")
-    if exists:
+    if os.path.exists(dir_str):
         static_dir = dir_str
         break
 
 if static_dir:
     app.mount("/static", StaticFiles(directory=static_dir), name="static")
     print(f"✅ Static files mounted from: {static_dir}")
-    print("✅ SPA routing configured")
 else:
-    print("⚠️  SPA routing not configured - no static directory found")
-    print("⚠️  Checked paths:", [str(p) for p in static_dirs])
+    print("⚠️  Static files not found - SPA routing disabled")
 
 # Test route for debugging
 @app.get("/test-spa")
