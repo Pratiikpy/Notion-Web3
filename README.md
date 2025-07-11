@@ -38,6 +38,11 @@ A Web3 social platform for sharing and discovering digital content (snippets, po
    - Example: `"https://my-irys-app.onrender.com"`
    - Commit and push this change
 
+5. **Static File Serving**
+   - ✅ Already configured: FastAPI now serves React build files
+   - The root route (`/`) serves the React app
+   - Static assets are served from `/static` path
+
 ### Required API Keys
 
 Before deploying, ensure you have:
