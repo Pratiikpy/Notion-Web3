@@ -906,7 +906,7 @@ const SnippetForm = ({ signer, userAddress, onSnippetSaved }) => {
       
       // Save metadata to database for social features
       try {
-        await fetch(`${API}/api/save-snippet-metadata`, {
+        await fetch(`${API}/save-snippet-metadata`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
