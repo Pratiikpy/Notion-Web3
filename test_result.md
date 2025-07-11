@@ -304,7 +304,7 @@ frontend:
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: true
         agent: "main"
@@ -312,6 +312,9 @@ frontend:
       - working: true
         agent: "testing"
         comment: "✅ Image upload and processing fully functional. Complete workflow tested: 1) /api/process-image endpoint processes base64 images with Claude AI generating descriptions, mood, and themes, 2) Irys blockchain upload stores image data with metadata, 3) Database saves metadata for social features. Transaction IDs and gateway URLs working correctly. Verified data retrieval from Irys devnet gateway."
+      - working: unknown
+        agent: "main"
+        comment: "User specifically mentions image upload may not be working. Priority for retesting."
 
 metadata:
   created_by: "main_agent"
