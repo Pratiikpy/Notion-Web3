@@ -995,7 +995,7 @@ async def test_endpoint():
 app.include_router(api_router)
 
 # Root mount must be LAST to avoid catching API routes
-app.mount("/", StaticFiles(directory="static", html=True), name="root")
+# app.mount("/", StaticFiles(directory="static", html=True), name="root")
 
 # Configure logging
 logging.basicConfig(
