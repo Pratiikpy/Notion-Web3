@@ -1047,8 +1047,8 @@ async def serve_spa(path: str = ""):
     if path.startswith("api"):
         return {"error": "API endpoint not found"}
     # For all routes (including root), serve index.html for client-side routing
-    if static_dir:
-        return FileResponse(f"{static_dir}/index.html")
+    if root_static_dir:
+        return FileResponse(f"{root_static_dir}/index.html")
     else:
         return {"error": "Static files not available"}
 
