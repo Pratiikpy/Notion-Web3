@@ -326,9 +326,13 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "Core snippet functionality"
+    - "Image upload and processing"
+    - "AI mood and theme analysis"
+    - "Social API endpoints implementation"
   stuck_tasks: []
-  test_all: false
+  test_all: true
   test_priority: "high_first"
 
 agent_communication:
