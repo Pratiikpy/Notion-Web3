@@ -489,7 +489,7 @@ const UserDiscovery = ({ userAddress }) => {
   const fetchUsers = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`${API}/users/discover`);
+      const response = await fetch(`${API}/api/users/discover`);
       if (!response.ok) throw new Error('Failed to fetch users');
       const data = await response.json();
       setUsers(data.users || []);
