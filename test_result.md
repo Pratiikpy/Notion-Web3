@@ -289,7 +289,7 @@ frontend:
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: true
         agent: "main"
@@ -297,6 +297,9 @@ frontend:
       - working: true
         agent: "testing"
         comment: "✅ AI mood and theme analysis working perfectly. Claude AI integration successfully analyzes text, poetry, quotes, and images. Generates accurate summaries, tags, mood (e.g., 'serene', 'contemplative'), and themes (e.g., 'nature', 'personal'). Tested with multiple content types."
+      - working: unknown
+        agent: "main"
+        comment: "User reports AI functionality may not be working. Need to verify Claude API integration and responses."
 
   - task: "Image upload and processing"
     implemented: true
