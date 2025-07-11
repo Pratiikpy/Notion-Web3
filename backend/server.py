@@ -1018,20 +1018,23 @@ for i, dir_path in enumerate(static_dirs):
 if static_dir:
     app.mount("/static", StaticFiles(directory=static_dir), name="static")
     print(f"✅ Static files mounted from: {static_dir}")
-    
-    # SPA routing for React - handles both root and all other routes
-    @app.get("/{path:path}")
-    async def serve_spa(path: str = ""):
-        """Serve React SPA for client-side routing"""
-        # Skip API routes (they are handled by the router)
-        if path.startswith("api"):
-            return {"error": "API endpoint not found"}
-        # For all routes (including root), serve index.html for client-side routing
-        return FileResponse(f"{static_dir}/index.html")
     print("✅ SPA routing configured")
 else:
     print("⚠️  SPA routing not configured - no static directory found")
     print("⚠️  Checked paths:", [str(p) for p in static_dirs])
+
+# SPA routing for React - handles both root and all other routes
+@app.get("/{path:path}")
+async def serve_spa(path: str = ""):
+    """Serve React SPA for client-side routing"""
+    # Skip API routes (they are handled by the router)
+    if path.startswith("api"):
+        return {"error": "API endpoint not found"}
+    # For all routes (including root), serve index.html for client-side routing
+    if static_dir:
+        return FileResponse(f"{static_dir}/index.html")
+    else:
+        return {"error": "Static files not available"}
 
 # Configure logging
 logging.basicConfig(
