@@ -816,24 +816,7 @@ async def get_public_feed(skip: int = 0, limit: int = 20):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching feed: {str(e)}")
 
-@api_router.get("/users/discover")
-async def discover_users(skip: int = 0, limit: int = 20):
-    """Discover users with most snippets or followers."""
-    try:
-        users = await db.user_profiles.find().sort([
-            ("snippets_count", -1),
-            ("followers_count", -1)
-        ]).skip(skip).limit(limit).to_list(limit)
-        
-        for user in users:
-            user["_id"] = str(user["_id"])
-        
-        return {"users": users, "has_more": len(users) == limit}
-        
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error discovering users: {str(e)}")
 
-@api_router.post("/social/follow")
 async def follow_user(request: FollowRequest):
     """Follow another user."""
     try:
