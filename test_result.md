@@ -155,6 +155,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ FINAL VERIFICATION: Complete core functionality testing confirmed. Web URL extraction from https://example.com working, AI summarization generating proper summaries and tags, Irys blockchain uploads generating real transaction IDs, metadata saving to database successful. All core snippet features fully operational."
+      - working: true
+        agent: "testing"
+        comment: "✅ CRITICAL ENDPOINTS VERIFIED: Core snippet functionality working perfectly. POST /api/extract-snippet extracting content from real URLs (https://example.com), AI summarization via POST /api/summarize generating proper summaries and tags, Irys blockchain storage via POST /api/irys-upload generating real transaction IDs (e.g., Cfvoi5URJaDsMdPPdFL4zjiFfayQdM3sXbUFHwyB3Wsc). Complete end-to-end workflow functional."
 
 frontend:
   - task: "Social navigation system"
