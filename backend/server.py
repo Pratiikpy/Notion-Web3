@@ -974,28 +974,30 @@ async def get_user_snippets(wallet_address: str):
         raise HTTPException(status_code=500, detail=f"Error fetching snippets: {str(e)}")
 
 # Static file serving for React frontend
-# app.mount("/static", StaticFiles(directory="static"), name="static")
-
-# Health check endpoint for Vercel testing - defined before root mount
-@app.get("/api/health")
-async def health_check():
-    """Health check endpoint for Vercel deployment testing"""
-    return {
-        "status": "healthy",
-        "message": "Irys Snippet Vault API is running",
-        "timestamp": datetime.utcnow().isoformat()
-    }
-
-@app.get("/api/test")
-async def test_endpoint():
-    """Test endpoint for Vercel deployment verification"""
-    return {"message": "API is working correctly", "version": "1.0.0"}
+# Only mount static files if directory exists (for Render deployment)
+import os
+static_dir = "static"
+if os.path.exists(static_dir):
+    app.mount("/static", StaticFiles(directory=static_dir), name="static")
+    print(f"✅ Static files mounted from: {static_dir}")
+else:
+    print(f"⚠️  Static directory not found: {static_dir}")
 
 # Include the router in the main app
 app.include_router(api_router)
 
-# Root mount must be LAST to avoid catching API routes
-# app.mount("/", StaticFiles(directory="static", html=True), name="root")
+# Root mount for SPA (Single Page Application) - only if static dir exists
+if os.path.exists(static_dir):
+    @app.get("/{path:path}")
+    async def serve_spa(path: str):
+        """Serve React SPA for client-side routing"""
+        # For client-side routing, serve index.html for unknown paths
+        if path and not path.startswith("api/"):
+            return FileResponse(f"{static_dir}/index.html")
+        return FileResponse(f"{static_dir}/index.html")
+    print("✅ SPA routing configured")
+else:
+    print("⚠️  SPA routing not configured - static directory missing")
 
 # Configure logging
 logging.basicConfig(
