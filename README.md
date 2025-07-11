@@ -56,6 +56,9 @@ Before deploying, ensure you have:
 ### Local Development
 
 ```bash
+# Prerequisites: Node.js v20+ (required for react-router-dom@7.5.1)
+node --version  # Should be v20 or higher
+
 # Install backend dependencies
 cd backend
 pip install -r requirements.txt
