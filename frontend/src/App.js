@@ -375,7 +375,7 @@ const UserProfile = ({ userAddress, signer }) => {
   const fetchProfile = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`${API}/users/${userAddress}`);
+      const response = await fetch(`${API}/api/users/${userAddress}`);
       if (!response.ok) throw new Error('Failed to fetch profile');
       const data = await response.json();
       setProfile(data);
