@@ -1,7 +1,7 @@
 # Multi-stage build for React frontend + FastAPI backend
 
 # Stage 1: Build React frontend
-FROM node:18 as frontend
+FROM node:20 as frontend
 
 WORKDIR /app/frontend
 
@@ -19,10 +19,10 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install Node.js for Irys service
+# Install Node.js v20 for Irys service
 RUN apt-get update && apt-get install -y \
     curl \
-    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
