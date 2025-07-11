@@ -974,7 +974,7 @@ async def get_user_snippets(wallet_address: str):
         raise HTTPException(status_code=500, detail=f"Error fetching snippets: {str(e)}")
 
 # Static file serving for React frontend
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Health check endpoint for Vercel testing - defined before root mount
 @app.get("/api/health")
