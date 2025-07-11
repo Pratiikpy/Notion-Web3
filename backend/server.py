@@ -33,8 +33,9 @@ app = FastAPI(title="Irys Snippet Vault API - Social Features")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://YOUR-SERVICE.onrender.com",  # Replace YOUR-SERVICE with your actual Render service name
+        "https://notion-web3.onrender.com",  # Your actual Render service URL
         "http://localhost:8000",
+        "http://localhost:8001",  # Local development
         "*"  # Keep wildcard for development
     ],
     allow_credentials=True,
