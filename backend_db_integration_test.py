@@ -4,7 +4,7 @@ import uuid
 
 class DatabaseIntegrationTest:
     def __init__(self):
-        self.base_url = "https://715b4b17-c294-4e5e-a2bc-e42ae079693b.preview.emergentagent.com"
+        self.base_url = "https://a2f5ec7e-62e8-4e0c-9e4d-d1c60e3e8e13.preview.emergentagent.com"
         self.api_url = f"{self.base_url}/api"
         self.wallet1 = f"0x{uuid.uuid4().hex[:40]}"
         self.wallet2 = f"0x{uuid.uuid4().hex[:40]}"
