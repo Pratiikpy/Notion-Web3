@@ -29,7 +29,8 @@ A Web3 social platform for sharing and discovering digital content (snippets, po
 
 3. **Deploy**
    - Click "Deploy" button
-   - **Multi-stage build**: Frontend is built automatically using Node.js, then served by FastAPI
+   - **Multi-stage build**: Frontend is built automatically using Node.js v20, then served by FastAPI
+   - **Compatibility**: Node.js v20 supports react-router-dom@7.5.1 and React 19
    - First build takes approximately 3-5 minutes (includes React build)
    - Wait for deployment to complete
 
