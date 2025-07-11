@@ -1013,19 +1013,14 @@ if static_dir:
     app.mount("/static", StaticFiles(directory=static_dir), name="static")
     print(f"✅ Static files mounted from: {static_dir}")
     
-    @app.get("/")
-    async def serve_spa_root():
-        """Serve React SPA root"""
-        return FileResponse(f"{static_dir}/index.html")
-    
-    # Catch-all route for SPA client-side routing (must be last)
+    # SPA routing for React - this should be LAST to avoid catching API routes
     @app.get("/{path:path}")
     async def serve_spa(path: str):
         """Serve React SPA for client-side routing"""
         # Skip API routes (they are handled by the router)
         if path.startswith("api"):
             return {"error": "API endpoint not found"}
-        # For client-side routing, serve index.html for unknown paths
+        # For all other routes, serve index.html for client-side routing
         return FileResponse(f"{static_dir}/index.html")
     print("✅ SPA routing configured")
 else:
