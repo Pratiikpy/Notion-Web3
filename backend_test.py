@@ -538,7 +538,190 @@ class IrysSnippetVaultTester:
         
         return True
 
-    def test_api_routing_fix(self):
+    def test_critical_endpoints_routing_fix(self):
+        """Test the critical API endpoints that were failing due to double /api/ prefix issue"""
+        print("\n🎯 TESTING CRITICAL ENDPOINTS - Double /api/ Prefix Fix Verification")
+        print("="*70)
+        print("Focus: Ensuring endpoints return proper responses (200, 201) instead of 404/405 errors")
+        print("="*70)
+        
+        critical_tests_passed = 0
+        critical_tests_total = 8
+        
+        # Priority 1 - Extract Snippet Endpoint
+        print("\n🔥 PRIORITY 1: Extract Snippet Endpoint")
+        success, response = self.run_test(
+            "POST /api/extract-snippet with real URL",
+            "POST",
+            "extract-snippet",
+            200,
+            data={"url": "https://example.com"}
+        )
+        if success:
+            critical_tests_passed += 1
+            print("✅ Extract snippet working - NO 404/405 errors")
+            print(f"   Response: {response.get('title', 'N/A')[:50]}...")
+        else:
+            print("❌ Extract snippet FAILED - API routing issue")
+        
+        # Priority 2 - User Profile Endpoints
+        print("\n👤 PRIORITY 2: User Profile Endpoints")
+        
+        # Test GET /api/users/discover
+        success, response = self.run_test(
+            "GET /api/users/discover",
+            "GET",
+            "users/discover",
+            200
+        )
+        if success:
+            critical_tests_passed += 1
+            print("✅ User discovery working - NO 404/405 errors")
+            print(f"   Found: {len(response.get('users', []))} users")
+        else:
+            print("❌ User discovery FAILED - API routing issue")
+        
+        # Test GET /api/users/{address}
+        test_address = self.test_wallet_address_1
+        success, response = self.run_test(
+            f"GET /api/users/{test_address}",
+            "GET",
+            f"users/{test_address}",
+            200
+        )
+        if success:
+            critical_tests_passed += 1
+            print("✅ User profile retrieval working - NO 404/405 errors")
+            print(f"   Address: {response.get('wallet_address', 'N/A')[:20]}...")
+        else:
+            print("❌ User profile retrieval FAILED - API routing issue")
+        
+        # Priority 3 - Social Features
+        print("\n🌐 PRIORITY 3: Social Features")
+        
+        # Test GET /api/feed/public
+        success, response = self.run_test(
+            "GET /api/feed/public",
+            "GET",
+            "feed/public",
+            200
+        )
+        if success:
+            critical_tests_passed += 1
+            print("✅ Public feed working - NO 404/405 errors")
+            print(f"   Feed items: {len(response.get('feed', []))}")
+        else:
+            print("❌ Public feed FAILED - API routing issue")
+        
+        # Test POST /api/social/like
+        success, response = self.run_test(
+            "POST /api/social/like",
+            "POST",
+            "social/like",
+            200,
+            data={
+                "user_address": self.test_wallet_address_1,
+                "snippet_id": f"test-snippet-{uuid.uuid4()}"
+            }
+        )
+        if success:
+            critical_tests_passed += 1
+            print("✅ Social like working - NO 404/405 errors")
+            print(f"   Response: {response.get('message', 'N/A')}")
+        else:
+            print("❌ Social like FAILED - API routing issue")
+        
+        # Priority 4 - AI Processing
+        print("\n🤖 PRIORITY 4: AI Processing")
+        
+        # Test POST /api/process-text
+        success, response = self.run_test(
+            "POST /api/process-text",
+            "POST",
+            "process-text",
+            200,
+            data={
+                "title": "Test AI Analysis",
+                "content": "This is a test of the AI processing capabilities for text analysis.",
+                "content_type": "text"
+            }
+        )
+        if success:
+            critical_tests_passed += 1
+            print("✅ AI text processing working - NO 404/405 errors")
+            print(f"   Summary: {response.get('summary', 'N/A')[:50]}...")
+        else:
+            print("❌ AI text processing FAILED - API routing issue")
+        
+        # Test POST /api/process-image
+        test_image_base64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+        success, response = self.run_test(
+            "POST /api/process-image",
+            "POST",
+            "process-image",
+            200,
+            data={
+                "title": "Test Image Processing",
+                "image_data": test_image_base64,
+                "description": "A test image for API validation",
+                "content_type": "image"
+            }
+        )
+        if success:
+            critical_tests_passed += 1
+            print("✅ AI image processing working - NO 404/405 errors")
+            print(f"   Summary: {response.get('summary', 'N/A')[:50]}...")
+        else:
+            print("❌ AI image processing FAILED - API routing issue")
+        
+        # Priority 5 - Irys Integration
+        print("\n⛓️ PRIORITY 5: Irys Integration")
+        
+        # Test POST /api/irys-upload
+        test_data = {
+            "title": "Test Blockchain Upload",
+            "summary": "Testing Irys blockchain integration",
+            "tags": ["test", "blockchain", "irys"],
+            "network": "devnet"
+        }
+        success, response = self.run_test(
+            "POST /api/irys-upload",
+            "POST",
+            "irys-upload",
+            200,
+            data={
+                "data": json.dumps(test_data),
+                "signature": f"test-signature-{uuid.uuid4()}",
+                "address": self.test_wallet_address_1,
+                "tags": [{"name": "App-Name", "value": "IrysSnippetVault"}]
+            }
+        )
+        if success:
+            critical_tests_passed += 1
+            print("✅ Irys upload working - NO 404/405 errors")
+            print(f"   Transaction ID: {response.get('id', 'N/A')}")
+            print(f"   Gateway URL: {response.get('gateway_url', 'N/A')}")
+        else:
+            print("❌ Irys upload FAILED - API routing issue")
+        
+        # Summary of critical endpoints test
+        print("\n" + "="*70)
+        print(f"🎯 CRITICAL ENDPOINTS RESULTS: {critical_tests_passed}/{critical_tests_total} endpoints working")
+        print("="*70)
+        
+        if critical_tests_passed == critical_tests_total:
+            print("🎉 DOUBLE /api/ PREFIX FIX SUCCESSFUL!")
+            print("✅ ALL critical endpoints responding correctly")
+            print("✅ NO MORE 404 Not Found or 405 Method Not Allowed errors")
+            print("✅ Frontend can now communicate with backend properly")
+            print("✅ User concerns about app functionality RESOLVED")
+        else:
+            failed_critical = critical_tests_total - critical_tests_passed
+            print(f"❌ CRITICAL ROUTING ISSUES: {failed_critical} endpoints still failing")
+            print("❌ Double /api/api/ prefix issue may persist")
+            print("❌ User reported functionality issues NOT fully resolved")
+        
+        return critical_tests_passed, critical_tests_total
         """Test the specific API routing fix - NO MORE double /api/api/ prefix"""
         print("\n🔧 TESTING API ROUTING FIX - Critical Double Prefix Issue")
         print("="*60)
