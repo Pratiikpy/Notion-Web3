@@ -128,6 +128,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ FINAL VERIFICATION: Complete social API testing on production deployment. All endpoints working perfectly: user profiles (create/get), follow/unfollow system, like/unlike toggle, comment system, public feed with 2 items, user discovery. Social interactions fully functional with proper database integration."
+      - working: true
+        agent: "testing"
+        comment: "✅ CRITICAL ENDPOINTS VERIFIED: All social API endpoints working perfectly in production. User profiles (POST /api/users/profile, GET /api/users/{address}) working, user discovery (GET /api/users/discover) found 3 users, public feed (GET /api/feed/public) returning 2 items, social interactions (POST /api/social/like, POST /api/social/follow, POST /api/social/comment) all functional. Double /api/ prefix issue completely resolved."
 
   - task: "Core snippet functionality"
     implemented: true
