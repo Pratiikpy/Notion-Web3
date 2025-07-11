@@ -5,6 +5,7 @@ import './App.css';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://notion-web3.onrender.com';
 console.log('Backend URL:', BACKEND_URL); // Debug log - Updated for Render deployment
 console.log('All env vars:', Object.keys(process.env).filter(key => key.startsWith('REACT_APP_')));
+// Remove the /api suffix since backend routes already have /api prefix
 const API = `${BACKEND_URL}/api`;
 
 // Glass Card Component
