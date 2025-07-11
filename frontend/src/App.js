@@ -718,7 +718,7 @@ const SnippetForm = ({ signer, userAddress, onSnippetSaved }) => {
     
     try {
       setIsExtracting(true);
-      const response = await fetch(`${API}/extract-snippet`, {
+      const response = await fetch(`${API}/api/extract-snippet`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: url.trim() })
