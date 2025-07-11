@@ -195,7 +195,7 @@ const PublicFeed = ({ userAddress }) => {
     try {
       setIsLoading(true);
       setError(null);
-      const response = await fetch(`${API}/api/feed/public`);
+      const response = await fetch(`${API}/feed/public`);
       if (!response.ok) throw new Error('Failed to fetch feed');
       const data = await response.json();
       setFeed(data.feed || []);
