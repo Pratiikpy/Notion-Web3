@@ -504,7 +504,7 @@ const UserDiscovery = ({ userAddress }) => {
     if (!userAddress) return;
     
     try {
-      const response = await fetch(`${API}/api/social/follow`, {
+      const response = await fetch(`${API}/social/follow`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
