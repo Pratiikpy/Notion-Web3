@@ -25,6 +25,9 @@ COPY backend/ ./
 # Copy frontend build (we'll build it separately)
 COPY frontend/build ./static
 
+# Set default port for Render
+ENV PORT=8000
+
 # Expose port
 EXPOSE 8000
 
