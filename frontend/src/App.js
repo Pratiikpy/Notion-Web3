@@ -1198,7 +1198,7 @@ const SnippetList = ({ userAddress, refreshTrigger }) => {
     try {
       setIsLoading(true);
       // Fetch from backend which queries real Irys blockchain
-      const response = await fetch(`${API}/api/irys-query/${userAddress}`);
+      const response = await fetch(`${API}/irys-query/${userAddress}`);
       const data = await response.json();
       setSnippets(data.snippets || []);
     } catch (error) {
