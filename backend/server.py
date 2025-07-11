@@ -43,8 +43,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Create a router without prefix (api prefix will be added by frontend)
-api_router = APIRouter()
+# Create a router with the /api prefix
+api_router = APIRouter(prefix="/api")
 
 # Models
 class StatusCheck(BaseModel):
