@@ -68,7 +68,7 @@ const CommentSystem = ({ snippetId, userAddress, isOpen, onClose }) => {
 
     try {
       setIsSubmitting(true);
-      const response = await fetch(`${API}/api/social/comment`, {
+      const response = await fetch(`${API}/social/comment`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
