@@ -801,6 +801,7 @@ async def get_public_feed(skip: int = 0, limit: int = 20):
         raise HTTPException(status_code=500, detail=f"Error fetching feed: {str(e)}")
 
 
+@api_router.post("/social/follow")
 async def follow_user(request: FollowRequest):
     """Follow another user."""
     try:
