@@ -1041,7 +1041,8 @@ class IrysSnippetVaultTester:
 
 def main():
     tester = IrysSnippetVaultTester()
-    success = tester.run_all_tests()
+    # Run focused test on critical endpoints as requested in review
+    success = tester.run_critical_endpoints_test()
     return 0 if success else 1
 
 if __name__ == "__main__":
