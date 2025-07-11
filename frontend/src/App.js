@@ -797,7 +797,7 @@ const SnippetForm = ({ signer, userAddress, onSnippetSaved }) => {
         const base64Data = e.target.result;
         
         try {
-          const response = await fetch(`${API}/process-image`, {
+          const response = await fetch(`${API}/api/process-image`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
