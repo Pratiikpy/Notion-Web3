@@ -816,7 +816,36 @@ class IrysSnippetVaultTester:
             print("❌ Double prefix /api/api/ issue may still exist")
             print("❌ Frontend-backend communication may be broken")
         
-        return routing_tests_passed == routing_tests_total
+    def run_critical_endpoints_test(self):
+        """Run focused test on critical endpoints mentioned in review request"""
+        print("🚀 FOCUSED TESTING: Critical API Endpoints - Double /api/ Prefix Fix")
+        print("Context: User reports app functions may not work after deployment changes")
+        print("Focus: Testing routing is working correctly (not getting 404 or 405 errors)")
+        print("="*80)
+        
+        # Test the critical endpoints that were failing
+        critical_passed, critical_total = self.test_critical_endpoints_routing_fix()
+        
+        # Print final summary
+        print("\n" + "="*80)
+        print(f"📊 CRITICAL ENDPOINTS TEST RESULTS: {critical_passed}/{critical_total} endpoints working")
+        print("="*80)
+        
+        success_rate = (critical_passed / critical_total) * 100
+        
+        if success_rate == 100:
+            print("🎉 PERFECT SUCCESS: All critical endpoints working!")
+            print("✅ Double /api/ prefix issue COMPLETELY RESOLVED")
+            print("✅ User concerns about app functionality FULLY ADDRESSED")
+        elif success_rate >= 80:
+            print(f"✅ MOSTLY SUCCESSFUL: {success_rate:.1f}% of critical endpoints working")
+            print("✅ Major routing issues resolved, minor issues may remain")
+        else:
+            print(f"❌ SIGNIFICANT ISSUES: Only {success_rate:.1f}% of critical endpoints working")
+            print("❌ Double /api/ prefix issue NOT fully resolved")
+            print("❌ User concerns about app functionality NOT addressed")
+        
+        return critical_passed == critical_total
 
     def run_all_tests(self):
         """Run all API tests in sequence"""
