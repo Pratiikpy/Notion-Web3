@@ -998,9 +998,9 @@ from pathlib import Path
 
 # Try different possible static directories
 static_dirs = [
-    "static",  # Render deployment path
-    Path(__file__).parent / "static",  # Explicit relative path
-    Path(__file__).parent / "../frontend/build",  # Local development path
+    "static/static",  # Render deployment path (nested static from React build)
+    Path(__file__).parent / "static" / "static",  # Explicit relative path (nested)
+    Path(__file__).parent / "../frontend/build/static",  # Local development path
 ]
 
 static_dir = None
@@ -1015,6 +1015,23 @@ if static_dir:
     print(f"✅ Static files mounted from: {static_dir}")
 else:
     print("⚠️  Static files not found - SPA routing disabled")
+
+# Also mount the root static directory to serve index.html and other assets
+root_static_dirs = [
+    "static",  # Render deployment path
+    Path(__file__).parent / "static",  # Explicit relative path
+    Path(__file__).parent / "../frontend/build",  # Local development path
+]
+
+root_static_dir = None
+for dir_path in root_static_dirs:
+    dir_str = str(dir_path)
+    if os.path.exists(dir_str):
+        root_static_dir = dir_str
+        break
+
+if root_static_dir:
+    print(f"✅ Root static directory found: {root_static_dir}")
 
 # Test route for debugging
 @app.get("/test-spa")
