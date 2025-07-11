@@ -111,7 +111,7 @@ backend:
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: true
         agent: "main"
@@ -119,6 +119,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "All 18 core tests + 6 edge case tests + 2 database integration tests passed. Backend fully functional."
+      - working: unknown
+        agent: "main"
+        comment: "User reports app functions may not be working after deployment. Need comprehensive retesting."
 
   - task: "Core snippet functionality"
     implemented: true
