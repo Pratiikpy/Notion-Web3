@@ -399,3 +399,13 @@ agent_communication:
     message: "🚀 WHITE SCREEN FIXED BUT FUNCTIONALITY ISSUES REPORTED: User confirms white screen error resolved and app loads properly. However, reports that core functions may not be working: AI analysis, image upload, blockchain storage, social features. Need comprehensive backend testing to identify and fix any broken functionality after deployment changes."
   - agent: "testing"
     message: "🎉 BACKEND FUNCTIONALITY FULLY CONFIRMED: Executed comprehensive testing of all 4 priority backend tasks. Results: 30/33 tests passed (91% success rate). ✅ ALL CRITICAL FEATURES WORKING: 1) Social API endpoints - user profiles, follow/unfollow, like/unlike, comments, public feed all functional, 2) Core snippet functionality - URL extraction, AI summarization, Irys blockchain uploads working with real transaction IDs, 3) AI mood/theme analysis - Claude API integration perfect for text/poetry/image processing, 4) Image upload processing - complete workflow from base64 upload to blockchain storage verified. ✅ FIXED: Missing soupsieve and @irys/upload dependencies. ❌ MINOR: 3 error handling tests failed (expected errors but got fallback responses - good resilient behavior). 🚀 BACKEND PRODUCTION READY - User reports resolved."
+  - agent: "main"
+    message: "🎯 CRITICAL FRONTEND ENVIRONMENT VARIABLE ISSUE RESOLVED: Fixed the double /api/api/ prefix issue by properly configuring React environment variables during build process. 
+    ROOT CAUSE: Frontend .env file had incorrect REACT_APP_BACKEND_URL pointing to old development URL instead of production URL.
+    SOLUTION IMPLEMENTED:
+    1. ✅ Updated frontend/.env to correct production URL: REACT_APP_BACKEND_URL=https://notion-web3.onrender.com
+    2. ✅ Modified build process to properly load environment variables: export $(cat .env | xargs) && yarn build
+    3. ✅ Verified built JavaScript contains correct backend URL: REACT_APP_BACKEND_URL:'https://notion-web3.onrender.com'
+    4. ✅ Copied corrected build files to backend static directory for serving
+    5. ✅ Confirmed app loads properly with console logs showing correct backend URL
+    RESULT: Frontend now making API calls to correct backend URL, eliminating double /api/api/ prefix issue. App displaying properly with no white screen."
