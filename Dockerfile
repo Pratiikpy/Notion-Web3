@@ -18,6 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy and install Node.js dependencies for Irys
 COPY backend/package.json backend/package-lock.json ./
 RUN npm install
+RUN npm prune --production
 
 # Copy backend code
 COPY backend/ ./
