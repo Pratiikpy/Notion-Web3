@@ -129,7 +129,7 @@ backend:
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: true
         agent: "main"
@@ -137,6 +137,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "Verified working during social features testing"
+      - working: unknown
+        agent: "main"
+        comment: "User reports AI and other functions may not be working. Need comprehensive retesting."
 
 frontend:
   - task: "Social navigation system"
