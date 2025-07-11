@@ -629,6 +629,18 @@ class IrysSnippetVaultTester:
         """Run all API tests in sequence"""
         print("🚀 Starting Irys Snippet Vault API Tests with Enhanced Content Creation")
         
+        # PRIORITY: Test API routing fix first (as requested in review)
+        print("\n🚨 PRIORITY TEST: API Routing Fix Verification")
+        routing_fix_success = self.test_api_routing_fix()
+        
+        if not routing_fix_success:
+            print("\n❌ CRITICAL: API routing fix failed - this is the main issue reported by user")
+            print("❌ Stopping comprehensive tests due to routing failure")
+            print(f"📊 ROUTING FIX TEST RESULTS: FAILED")
+            return False
+        
+        print("\n✅ API routing fix verified - continuing with comprehensive tests...")
+        
         # Test root endpoint
         self.test_root_endpoint()
         
