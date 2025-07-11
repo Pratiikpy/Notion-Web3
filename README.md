@@ -29,7 +29,8 @@ A Web3 social platform for sharing and discovering digital content (snippets, po
 
 3. **Deploy**
    - Click "Deploy" button
-   - First build takes approximately 2-3 minutes
+   - **Multi-stage build**: Frontend is built automatically using Node.js, then served by FastAPI
+   - First build takes approximately 3-5 minutes (includes React build)
    - Wait for deployment to complete
 
 4. **Update CORS Settings**
@@ -39,8 +40,8 @@ A Web3 social platform for sharing and discovering digital content (snippets, po
    - Commit and push this change
 
 5. **Static File Serving**
-   - ✅ Already configured: FastAPI now serves React build files
-   - The root route (`/`) serves the React app
+   - ✅ Already configured: Multi-stage Docker build creates and serves React build files
+   - The root route (`/`) serves the React app with SPA routing support
    - Static assets are served from `/static` path
 
 ### Required API Keys
