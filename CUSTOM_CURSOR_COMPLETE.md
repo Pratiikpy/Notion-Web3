@@ -40,7 +40,7 @@
 
 ## 💫 **Your Blockchain App is Live!**
 
-**URL:** https://0bb6025e-e237-45ce-a098-51a15829f3a6.preview.emergentagent.com
+**URL:** https://273e3de1-7276-45fd-a73c-828a3ac7991c.preview.emergentagent.com
 
 **What works NOW:**
 - ✅ Wallet connection with real balance
