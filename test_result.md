@@ -367,3 +367,11 @@ agent_communication:
     7. ✅ Database operations - MongoDB integration working perfectly
     
     DEPLOYMENT READY: All Render optimizations complete + core functionality verified working at 94% success rate"
+  - agent: "main"
+    message: "🔧 CRITICAL NODE.JS VERSION FIX: Updated Dockerfile to use Node.js v20 instead of v18 to support react-router-dom@7.5.1 compatibility. Changes made:
+    1. ✅ Stage 1 frontend build: FROM node:20 as frontend
+    2. ✅ Stage 2 backend: Updated to install Node.js v20 for Irys service
+    3. ✅ Maintained yarn consistency throughout build process
+    4. ✅ Updated README to reflect Node.js v20 compatibility
+    
+    ISSUE RESOLVED: react-router-dom@7.5.1 requires Node.js >= v20, now properly supported in both build stages. This fixes the container build failures and ensures React Router works correctly."
