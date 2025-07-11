@@ -51,7 +51,7 @@ const CommentSystem = ({ snippetId, userAddress, isOpen, onClose }) => {
   const fetchComments = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`${API}/social/comments/${snippetId}`);
+      const response = await fetch(`${API}/api/social/comments/${snippetId}`);
       if (!response.ok) throw new Error('Failed to fetch comments');
       const data = await response.json();
       setComments(data.comments || []);
