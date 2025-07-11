@@ -992,17 +992,27 @@ async def test_endpoint():
 app.include_router(api_router)
 
 # Static file serving for React frontend
-# Only mount static files if directory exists (for Render deployment)
+# Support both local development and Render deployment
 import os
-static_dir = "static"
-if os.path.exists(static_dir):
+from pathlib import Path
+
+# Try different possible static directories
+static_dirs = [
+    "static",  # Render deployment path
+    Path(__file__).parent / "static",  # Explicit relative path
+    Path(__file__).parent / "../frontend/build",  # Local development path
+]
+
+static_dir = None
+for dir_path in static_dirs:
+    if os.path.exists(dir_path):
+        static_dir = str(dir_path)
+        break
+
+if static_dir:
     app.mount("/static", StaticFiles(directory=static_dir), name="static")
     print(f"✅ Static files mounted from: {static_dir}")
-else:
-    print(f"⚠️  Static directory not found: {static_dir}")
-
-# Root route for SPA (Single Page Application) - only if static dir exists
-if os.path.exists(static_dir):
+    
     @app.get("/")
     async def serve_spa_root():
         """Serve React SPA root"""
@@ -1019,7 +1029,8 @@ if os.path.exists(static_dir):
         return FileResponse(f"{static_dir}/index.html")
     print("✅ SPA routing configured")
 else:
-    print("⚠️  SPA routing not configured - static directory missing")
+    print("⚠️  SPA routing not configured - no static directory found")
+    print("⚠️  Checked paths:", [str(p) for p in static_dirs])
 
 # Configure logging
 logging.basicConfig(
