@@ -1023,6 +1023,12 @@ else:
     print("⚠️  SPA routing not configured - no static directory found")
     print("⚠️  Checked paths:", [str(p) for p in static_dirs])
 
+# Test route for debugging
+@app.get("/test-spa")
+async def test_spa():
+    """Test SPA route"""
+    return {"message": "SPA route test working"}
+
 # SPA routing for React - handles both root and all other routes
 @app.get("/{path:path}")
 async def serve_spa(path: str = ""):
