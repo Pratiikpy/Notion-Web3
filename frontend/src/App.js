@@ -5,8 +5,9 @@ import './App.css';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://notion-web3.onrender.com';
 console.log('Backend URL:', BACKEND_URL); // Debug log - Updated for Render deployment
 console.log('All env vars:', Object.keys(process.env).filter(key => key.startsWith('REACT_APP_')));
-// Remove the /api suffix since backend routes already have /api prefix
-const API = `${BACKEND_URL}/api`;
+// Backend routes already include /api prefix via APIRouter(prefix="/api")
+// So we don't need to add /api here - that was causing the double prefix issue!
+const API = BACKEND_URL;
 
 // Glass Card Component
 const GlassCard = ({ children, className = "", ...props }) => (
